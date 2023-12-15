@@ -1,4 +1,4 @@
-def wave_enemy_alive(enemys: list, sum=0) -> int:  # счётчик выживших врагов
+def wave_enemy_alive(enemies: list, sum=0) -> int:  # счётчик выживших врагов
     """"Returns sum of the living enemies
 
         :param enemys: enemys
@@ -8,30 +8,30 @@ def wave_enemy_alive(enemys: list, sum=0) -> int:  # счётчик выживш
         :returns: sum of the living enemies
         :rtype: int"""
     
-    for enemy in enemys:
+    for enemy in enemies:
         sum += enemy.alive
     return sum
 
 
-def movement_body_box(enemys: list):  # Столкновение врагов
+def movement_body_box(enemies: list):  # Столкновение врагов
     """"Changes enemy's coordinate if enemys collide
 
         :param enemys: enemys
         :type enemys: list
         :changes: enemy's coordinate
         :ctype: float"""
-    
-    for i in range(len(enemys) - 1):
-        for j in range(i + 1, len(enemys)):
-            if abs(enemys[j].enemy_pos_x - enemys[i].enemy_pos_x) <= 25 and abs(enemys[j].enemy_pos_y - enemys[i].enemy_pos_y) <= 50:
-                enemys[i].enemy_pos_y += 1
-                enemys[i].enemy_pos_x += 1
-                enemys[j].enemy_pos_y -= 1
-                enemys[j].enemy_pos_x -= 1
+
+    for i in range(len(enemies) - 1):
+        for j in range(i + 1, len(enemies)):
+            if abs(enemies[j].enemy_pos_x - enemies[i].enemy_pos_x) <= 25 and abs(enemies[j].enemy_pos_y - enemies[i].enemy_pos_y) <= 50:
+                enemies[i].enemy_pos_y += 1
+                enemies[i].enemy_pos_x += 1
+                enemies[j].enemy_pos_y -= 1
+                enemies[j].enemy_pos_x -= 1
 
 
 
-def allow_move(player_x: float, player_y: float, enemys: list, cases_ = '') -> str:  # Врезается ли игрок во врага
+def allow_move(player_x: float, player_y: float, enemies: list, cases_ = '') -> str:  # Врезается ли игрок во врага
     """"Returns the cases when the button's disabled 
 
         :param player_x: x-coordinate 
@@ -41,7 +41,7 @@ def allow_move(player_x: float, player_y: float, enemys: list, cases_ = '') -> s
         :returns: cases of button's disabled 
         :rtype: str"""
 
-    for enemy in enemys:
+    for enemy in enemies:
         if enemy.alive == 1:
             if 0 <= player_y - enemy.enemy_pos_y <= 40 and abs(enemy.enemy_pos_x - player_x) <= 20 and 'w' not in cases_:
                 cases_ += 'w'
