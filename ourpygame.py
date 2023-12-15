@@ -55,7 +55,7 @@ enemy5 = Enemy(-100, 300, 1)
 enemy6 = Enemy(800, 300, 1)
 enemy7 = Enemy(400, -100, 1)
 enemy8 = Enemy(400, 700, 1)
-enemy9 = Enemy(-100, 300, 1) # Made the enemy
+enemy9 = Enemy(-100, 300, 1)
 enemy10 = Enemy(800, 300, 1)
 enemy11 = Enemy(400, -100, 1)
 enemy12 = Enemy(400, 700, 1)
@@ -63,10 +63,10 @@ enemy13 = Enemy(-100, 300, 1)
 enemy14 = Enemy(800, 300, 1)
 enemy15 = Enemy(400, -100, 1)
 enemy16 = Enemy(400, 700, 1)
-enemys1 = [enemy1, enemy2]
-enemys2 = [enemy1, enemy2, enemy3, enemy4]
-enemys3 = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8]
-enemys4 = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy10, enemy11, enemy12, enemy13, enemy14, enemy15, enemy16]
+enemies1 = [enemy1, enemy2]
+enemies2 = [enemy1, enemy2, enemy3, enemy4]
+enemies3 = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8]
+enemies4 = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy10, enemy11, enemy12, enemy13, enemy14, enemy15, enemy16]
 
 
 for i in '12345678':  # Массивы с покадровой анимацией
@@ -84,7 +84,7 @@ for i in '12345678':  # Массивы с покадровой анимацие�
     fight_d.append(pygame.image.load("gamedamn/_fight/d/_" + i + ".png"))
     if i != '8' and i != '7' and i != '6':
         healthbar.append(pygame.image.load("gamedamn/healthbar/_" + i + '.png'))
-    for enemy in enemys4:
+    for enemy in enemies4:
         enemy.image_l.append(pygame.image.load("gamedamn/enemy/_a/слой-" + i + '.png'))
         enemy.image_r.append(pygame.image.load("gamedamn/enemy/d/слой-" + i + '.png'))
         enemy.image_u.append(pygame.image.load("gamedamn/enemy/w/_" + i + '.png'))
@@ -112,13 +112,14 @@ while running:
             sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            if quit_button_pos[0] <= mouse_pos[0] <= quit_button_pos[0] + quit_button_image.get_width() and quit_button_pos[1] <= mouse_pos[1] <= quit_button_pos[1] + quit_button_image.get_height() and start == 0:
-                # Quit the game
-                running = False
-                pygame.quit()
-                sys.exit()
-            if play_button_pos[0] <= mouse_pos[0] <= play_button_pos[0] + play_button_image.get_width() and play_button_pos[1] <= mouse_pos[1] <= play_button_pos[1] + play_button_image.get_height():
-                start = 1
+            if start == 0:
+                if quit_button_pos[0] <= mouse_pos[0] <= quit_button_pos[0] + quit_button_image.get_width() and quit_button_pos[1] <= mouse_pos[1] <= quit_button_pos[1] + quit_button_image.get_height():
+                    # Quit the game
+                    running = False
+                    pygame.quit()
+                    sys.exit()
+                if play_button_pos[0] <= mouse_pos[0] <= play_button_pos[0] + play_button_image.get_width() and play_button_pos[1] <= mouse_pos[1] <= play_button_pos[1] + play_button_image.get_height():
+                    start = 1
 
 
     if start == 0:
@@ -131,32 +132,32 @@ while running:
     if start == 1:
         screen.blit(bg, (0, 0))  # Stratin settings
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_w] or keys[pygame.K_s] or keys[pygame.K_a] or keys[pygame.K_d]:  # Счётчики задаржки кадров анимации
+        if keys[pygame.K_w] or keys[pygame.K_s] or keys[pygame.K_a] or keys[pygame.K_d]:  # Счётчики задержки кадров анимации
             repeat_walk_anim += 1
             repeat_fight_anim += 1
         repeat_fire_anim += 1
 
 
         if wave == 1:  # Анимация передвижения врага
-            for enemy in enemys1:
+            for enemy in enemies1:
                 enemy.movement_plus_anim_enemys(player_x, player_y, screen)
                 health_arr.append(enemy.health_anim_count)
             health_anim_count = sum(health_arr)
             health_arr = []
         if wave == 2:
-            for enemy in enemys2:
+            for enemy in enemies2:
                 enemy.movement_plus_anim_enemys(player_x, player_y, screen)
                 health_arr.append(enemy.health_anim_count)
             health_anim_count = sum(health_arr)
             health_arr = []
         if wave == 3:
-            for enemy in enemys3:
+            for enemy in enemies3:
                 enemy.movement_plus_anim_enemys(player_x, player_y, screen)
                 health_arr.append(enemy.health_anim_count)
             health_anim_count = sum(health_arr)
             health_arr = []
         if wave == 4:
-            for enemy in enemys4:
+            for enemy in enemies4:
                 enemy.movement_plus_anim_enemys(player_x, player_y, screen)
                 health_arr.append(enemy.health_anim_count)
             health_anim_count = sum(health_arr)
@@ -212,20 +213,20 @@ while running:
             screen.blit(walk_off, (player_x, player_y))
 
 
-        movement_body_box(enemys4)  # Столкновения врагов
+        movement_body_box(enemies4)  # Столкновения врагов
 
 
-        if wave_enemy_alive(enemys1) == 0 and wave == 1:  # Счётчик волн
+        if wave_enemy_alive(enemies1) == 0 and wave == 1:  # Счётчик волн
             wave = 2
-        if wave_enemy_alive(enemys2) == 0 and wave == 2:
+        if wave_enemy_alive(enemies2) == 0 and wave == 2:
             wave = 3
-        if wave_enemy_alive(enemys3) == 0 and wave == 3:
+        if wave_enemy_alive(enemies3) == 0 and wave == 3:
             wave = 4
-        if wave_enemy_alive(enemys4) == 0 and wave == 4 and (
-          (enemys4[8].repeat_anim_die == 4 and enemys4[8].anim_die_count == 3) or (enemys4[9].repeat_anim_die == 4 and enemys4[9].anim_die_count == 3) or
-          (enemys4[10].repeat_anim_die == 4 and enemys4[10].anim_die_count == 3) or (enemys4[11].repeat_anim_die == 4 and enemys4[11].anim_die_count == 3) or
-          (enemys4[12].repeat_anim_die == 4 and enemys4[12].anim_die_count == 3) or (enemys4[13].repeat_anim_die == 4 and enemys4[13].anim_die_count == 3) or
-          (enemys4[14].repeat_anim_die == 4 and enemys4[14].anim_die_count == 3) or (enemys4[15].repeat_anim_die == 4 and enemys4[15].anim_die_count == 3)):
+        if wave_enemy_alive(enemies4) == 0 and wave == 4 and (
+          (enemies4[8].repeat_anim_die == 4 and enemies4[8].anim_die_count == 3) or (enemies4[9].repeat_anim_die == 4 and enemies4[9].anim_die_count == 3) or
+          (enemies4[10].repeat_anim_die == 4 and enemies4[10].anim_die_count == 3) or (enemies4[11].repeat_anim_die == 4 and enemies4[11].anim_die_count == 3) or
+          (enemies4[12].repeat_anim_die == 4 and enemies4[12].anim_die_count == 3) or (enemies4[13].repeat_anim_die == 4 and enemies4[13].anim_die_count == 3) or
+          (enemies4[14].repeat_anim_die == 4 and enemies4[14].anim_die_count == 3) or (enemies4[15].repeat_anim_die == 4 and enemies4[15].anim_die_count == 3)):
             wave = 6
 
 
@@ -233,31 +234,31 @@ while running:
             fight_anime_count = 0
             fight_anime_1 = 0
             if wave != 5:
-                if keys[pygame.K_a] and keys[pygame.K_w] and player_x > 40 and player_y > 40 and 'w' not in allow_move(player_x,player_y, enemys4) and 'a' not in allow_move(player_x, player_y, enemys4):
+                if keys[pygame.K_a] and keys[pygame.K_w] and player_x > 40 and player_y > 40 and 'w' not in allow_move(player_x,player_y, enemies4) and 'a' not in allow_move(player_x, player_y, enemies4):
                     player_x -= player_speed / 2**0.5
                     player_y -= player_speed / 2**0.5
-                elif keys[pygame.K_d] and keys[pygame.K_w] and player_x < 710 and player_y > 40 and 'w' not in allow_move(player_x,player_y, enemys4) and 'd' not in allow_move(player_x,player_y, enemys4):
+                elif keys[pygame.K_d] and keys[pygame.K_w] and player_x < 710 and player_y > 40 and 'w' not in allow_move(player_x,player_y, enemies4) and 'd' not in allow_move(player_x,player_y, enemies4):
                     player_x += player_speed / 2**0.5
                     player_y -= player_speed / 2**0.5
-                elif keys[pygame.K_a] and keys[pygame.K_s] and player_y < 510 and player_x > 40 and 'a' not in allow_move(player_x,player_y, enemys4) and 's' not in allow_move(player_x,player_y, enemys4):
+                elif keys[pygame.K_a] and keys[pygame.K_s] and player_y < 510 and player_x > 40 and 'a' not in allow_move(player_x,player_y, enemies4) and 's' not in allow_move(player_x,player_y, enemies4):
                     player_x -= player_speed / 2**0.5
                     player_y += player_speed / 2**0.5
-                elif keys[pygame.K_d] and keys[pygame.K_s] and player_y < 510 and player_x < 710 and 'd' not in allow_move(player_x,player_y, enemys4) and 's' not in allow_move(player_x,player_y, enemys4):
+                elif keys[pygame.K_d] and keys[pygame.K_s] and player_y < 510 and player_x < 710 and 'd' not in allow_move(player_x,player_y, enemies4) and 's' not in allow_move(player_x,player_y, enemies4):
                     player_x += player_speed / 2**0.5
                     player_y += player_speed / 2**0.5
-                elif keys[pygame.K_a] and player_x > 40 and 'a' not in allow_move(player_x,player_y, enemys4):
+                elif keys[pygame.K_a] and player_x > 40 and 'a' not in allow_move(player_x,player_y, enemies4):
                     player_x -= player_speed
-                elif keys[pygame.K_d] and player_x < 710 and 'd' not in allow_move(player_x,player_y, enemys4):
+                elif keys[pygame.K_d] and player_x < 710 and 'd' not in allow_move(player_x,player_y, enemies4):
                     player_x += player_speed
-                elif keys[pygame.K_w] and player_y > 40 and 'w' not in allow_move(player_x,player_y, enemys4):
+                elif keys[pygame.K_w] and player_y > 40 and 'w' not in allow_move(player_x,player_y, enemies4):
                     player_y -= player_speed
-                elif keys[pygame.K_s] and player_y < 510 and 's' not in allow_move(player_x,player_y, enemys4):
+                elif keys[pygame.K_s] and player_y < 510 and 's' not in allow_move(player_x,player_y, enemies4):
                     player_y += player_speed
         else:
             fight_anime_1 += 1
 
 
-        for enemy in enemys4:  # Сражение с врагами
+        for enemy in enemies4:  # Сражение с врагами
             if fight_anime_count == 5 and repeat_fight_anim == 2:
                 if keys[pygame.K_w] and keys[pygame.K_e] and 0 <= player_y - enemy.enemy_pos_y <= 60 and abs(player_x - enemy.enemy_pos_x) <= 50:
                     enemy.hp -= 0.5
@@ -310,7 +311,7 @@ while running:
 
     if start == 2:
         k = 1
-        for enemy in enemys4:
+        for enemy in enemies4:
             enemy.alive = 1
             enemy.hp = 1
             if k % 4 == 1:
