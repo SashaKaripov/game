@@ -20,7 +20,20 @@ class Enemy:
         self.hp = 1
 
 
-    def movement_plus_anim_enemys(self, player_x, player_y, screen):
+    def movement_plus_anim_enemys(self, player_x: float, player_y: float, screen):
+        """"Forces enemies to move towards the player and changes enemy's animation
+
+            :param player_x: x-coordinate 
+            :type player_x: float
+            :param player_y: y-coordinate
+            :type player_y: float
+            :param screen: game's screen
+            :type screen: Surface
+            :changes: enemy's coordinate and animation
+            :ctype: float
+            :outputs: enemy's animation
+            :otype: Surface"""
+
         if self.alive == 1:
             if not(abs(self.enemy_pos_x - player_x) <= 25 and abs(self.enemy_pos_y - player_y) <= 50):
                 if -70 <= player_x - self.enemy_pos_x <= 70 and self.enemy_pos_y - player_y > 50:
