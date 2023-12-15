@@ -2,6 +2,7 @@ import pygame
 import sys
 from funcs import *
 from Enemy1 import Enemy
+# Заимствований кода из учебников или других проектов не было
 
 
 pygame.display.set_caption("the Game")
