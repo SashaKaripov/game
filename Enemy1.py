@@ -1,14 +1,4 @@
 class Enemy:
-    """Represents an enemy character in the game
-
-        :param enemy_pos_x: The x-coordinate of the enemy's position
-        :type enemy_pos_x: float
-        :param enemy_pos_y: The y-coordinate of the enemy's position
-        :type enemy_pos_y: float
-        :param alive: Determines the life status of the enemy
-        :type alive: bool"""
-
-
     def __init__(self, enemy_pos_x, enemy_pos_y, alive):
         """Initializes an instance of the Enemy class
 
