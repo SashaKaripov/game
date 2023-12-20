@@ -3,7 +3,7 @@ from funcs import wave_enemy_alive, movement_body_box, allow_move
 from Enemy1 import Enemy
 
 
-test_enemy_1, test_enemy_2 = Enemy(0, 0, 1),Enemy(0, 0, 0)
+test_enemy_1, test_enemy_2 = Enemy(0, 0, 1), Enemy(0, 0, 0)
 
 
 def test_wave_enemy_alive_1():
@@ -52,7 +52,7 @@ def test_allow_move_1():
     assert allow_move(20, 40, [test_enemy_1, test_enemy_2]) == 'w'
     assert allow_move(40, 20, [test_enemy_1, test_enemy_2]) == 'a'
     assert allow_move(20, -40, [test_enemy_1, test_enemy_2]) == 's'
-    assert allow_move(-40 ,20, [test_enemy_1, test_enemy_2]) == 'd'
+    assert allow_move(-40, 20, [test_enemy_1, test_enemy_2]) == 'd'
 
 
 def test_allow_move_2():
@@ -60,3 +60,4 @@ def test_allow_move_2():
         allow_move(0, 0, 1)
     with pytest.raises(AttributeError):
         allow_move(0, 0, '1231321')
+        
